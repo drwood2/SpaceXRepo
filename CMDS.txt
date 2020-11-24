@@ -1,0 +1,49 @@
+#START DCSUPPLY 
+
+#INTERFACE TCP 
+#ADDRESS localhost
+#PORT  10000
+#DEBUG DCSUPPLYOUT.txt 
+
+#END DCSUPPLY
+
+#START VNA
+#INTERFACE TCP 
+#ADDRESS localhost
+#PORT 10000
+
+#END VNA
+
+#OUTPUT DCOUT.txt
+#OUTPUT FILE1.txt
+
+#START DCSUPPLY
+#DCOUT.txt
+OUTP 0 \\
+;VOLT:ALC OFF;MODE DC
+VOLT:RANG 500
+VOLT 450
+OUTP 1
+#END DCSUPPLY
+
+#START VNA
+:INITiate:CONTinuous
+:SENSe:FREQuency:STARt 1 MHZ
+:SENSe:FREQuency:STOP 2 MHZ
+#FILE1.txt
+:MEASure
+
+#DCOUT.txt
+:OtherThings
+:MoreOtherThings
+#END VNA
+
+//command would trigger error without this #PRAGMA
+;#START DCSUPPLY;
+OUTP 1;
+#END DCSUPPLY
+
+
+
+
+
