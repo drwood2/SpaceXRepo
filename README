@@ -1,0 +1,95 @@
+*******************************************************************************
+Operating Instructions
+
+The SCPI sequencer can be called by calling 
+
+"python3 scpiCMD.py --cmdsfile <COMMAND FILE>"
+
+This call will execute the SCPI calls located in the cmdsfile.
+
+
+*******************************************************************************
+
+Sequencer options:
+	--cmdsfile:
+		Command file containing SCPI commands and #Pragmas
+	--debug:
+		offering print statements to help diagnose incorrect cmds,etc.
+	--verify:
+		Does not actually transmit any commands, but communicates with 
+		instruments and verifies file syntax
+	--loopback:
+		Replaces any instrument connections with a socket connection to 
+		localhost. Can be used to isolate connection issues
+
+*******************************************************************************
+
+
+Command File Syntax
+
+Included is a sample "CMDs.txt" file which contains not only a selection of 
+real SCPI commands but also all available #Pragmas and syntax options
+
+//comments are ignored
+
+\\ linebreaks allow dividing longer commands across multiple lines
+
+; can seperate commands or be added to the end of lines, if desired
+
+#Pragma modifiers such as "#INTERFACE TCP" inform the sequencer on how to set
+up a connection to the different instruments.
+
+
+*******************************************************************************
+
+
+#Pragma format
+All standalone #Pragmas are key:value pairs, #<KEY>:<VALUE>, while command 
+modifiers are single word #<COMMAND> values.
+
+All #Pragma options:
+
+#START <INSTRUMENT>:
+	Implementation similar to the "begin/end" commands in Verilog.
+	This indicates to the sequencer which instrument receives which commands
+
+	Implementation similar to the "begin/end" commands in Verilog.
+
+	This indicates to the sequencer which instrument receives which commands
+#END <INSTRUMENT>:
+	Implementation similar to the "begin/end" commands in Verilog.
+	This indicates to the sequencer which instrument receives which commands
+
+#DEBUG <FILE.txt>:
+	Stores entirety of an instrument's TX'd/RX'd commands into <FILE.txt>
+	Must be located inside a START/END block
+
+#OUTPUT <FILE.txt>:
+	Stores command outputs to <FILE.txt> when <FILE.txt> is added as a #PRAGMA
+
+#<FILE.txt>
+<CMD>		:
+	Stores <CMD>'s output to <FILE.txt>. See CMDs.txt for examples
+
+
+
+#INSTRUMENT <INSTRUMENT>:
+	Descriptor indicating the following commands will be in some way modifying
+<INSTRUMENT>
+
+#Interface <INTERFACE TYPE>:
+	Currently only TCP connections are supported, 
+this command would differentiate between Serial,GPIO options, etc.
+
+#ADDRESS <IP_ADDRESS>:
+	Currently only TCP connections are supported,
+this command would be used for other address formats as well (i.e. uart0)
+
+#PORT <PORT NUM>:
+	Port to use for TCP connections
+
+
+
+
+
+

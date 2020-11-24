@@ -1,0 +1,14 @@
+SEND line: 23
+OUTP 0
+SEND line: 23
+VOLT:ALC OFF
+SEND line: 23
+MODE DC
+SEND line: 24
+VOLT:RANG 500
+SEND line: 25
+VOLT 450
+SEND line: 26
+OUTP 1
+SEND line: 43
+OUTP 1
