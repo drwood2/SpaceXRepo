@@ -1,2 +1,0 @@
-# SpaceX
- SpaceX Homework assignment
